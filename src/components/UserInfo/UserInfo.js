@@ -14,6 +14,7 @@ class UserInfo extends Component {
     componentDidMount() {
 
         this.props.dispatch(fetchUser());
+        this.props.dispatch({ type: 'GET_TOTALS'})
         
       }
     

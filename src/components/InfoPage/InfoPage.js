@@ -32,6 +32,9 @@ class InfoPage extends Component {
           <p>
             Info Page
           </p>
+          <input placeholder='description'></input>
+          <input type='text' placeholder='absolute url'></input>
+          <button>Add!</button>
         </div>
       );
     }

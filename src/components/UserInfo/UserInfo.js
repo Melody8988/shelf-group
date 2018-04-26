@@ -8,6 +8,7 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  userInfo: state.userInfo
 });
 
 class UserInfo extends Component {
@@ -30,13 +31,20 @@ class UserInfo extends Component {
       }
     
       render() {
+
+        let userInfo = this.props.userInfo.map((item) => {
+          return (
+            <div>{item.username} {item.count}</div>
+          )
+        });
+
         let content = null;
         //map over join table data
     
         if (this.props.user.userName) {
           content = (
             <div>
-              
+            {userInfo}
             </div>
           );
         }

@@ -12,7 +12,9 @@ const mapStateToProps = state => ({
 
 class UserInfo extends Component {
     componentDidMount() {
+
         this.props.dispatch(fetchUser());
+        
       }
     
       componentDidUpdate() {
@@ -28,20 +30,12 @@ class UserInfo extends Component {
     
       render() {
         let content = null;
+        //map over join table data
     
         if (this.props.user.userName) {
           content = (
             <div>
-              <h1
-                id="welcome"
-              >
-                Welcome, { this.props.user.userName }!
-              </h1>
-              <button
-                onClick={this.logout}
-              >
-                Log Out
-              </button>
+              
             </div>
           );
         }

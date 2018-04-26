@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * Get all of the items on the shelf
- */
+//comment for test
 router.get('/', (req, res) => {
 // This route should return all users and their items
     console.log('/userinfo GET route');

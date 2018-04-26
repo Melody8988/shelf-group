@@ -1,24 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import Nav from '../../components/Nav/Nav';
 
 import { fetchUser } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
+import ShelfItemsList from '../ShelfItemsList/ShelfItemsList';
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
 class UserPage extends Component {
+  state = {
+    shelfItems: []
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchUser());
+    this.getShelf();
   }
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('home');
     }
+  }
+
+  getShelf = () => {
+    axios.get('/api/shelf').then((response) => {
+      this.setState({
+        shelfItems: response.data        
+      })
+      console.log(this.state.shelfItems);
+      
+    }).catch((error) => {
+        console.log('Error in get', error);
+    })
+    
   }
 
   logout = () => {
@@ -28,7 +48,9 @@ class UserPage extends Component {
 
   render() {
     let content = null;
-
+    let shelfItemsList = this.state.shelfItems.map((item) => {
+      return(<ShelfItemsList key={item.id} item={item}/>)
+    })
     if (this.props.user.userName) {
       content = (
         <div>
@@ -37,6 +59,7 @@ class UserPage extends Component {
           >
             Welcome, { this.props.user.userName }!
           </h1>
+          {shelfItemsList}
           <button
             onClick={this.logout}
           >

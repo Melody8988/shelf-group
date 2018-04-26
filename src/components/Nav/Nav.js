@@ -7,12 +7,17 @@ const Nav = () => (
       <ul>
         <li>
           <Link to="/user">
-            User Home
+            View Shelf Items
           </Link>
         </li>
         <li>
           <Link to="/info">
-            Info Page
+            Add Shelf Item
+          </Link>
+        </li>
+        <li>
+          <Link to="/userinfo">
+            User Info Page
           </Link>
         </li>
       </ul>

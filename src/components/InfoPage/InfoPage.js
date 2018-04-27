@@ -37,7 +37,7 @@ class InfoPage extends Component {
   }
 
   handleClick = () => {
-    console.log('clicked!')
+    console.log('clicked!', this.state.description)
     this.props.dispatch({
       type: 'ADD_IMAGE',
       payload: this.state

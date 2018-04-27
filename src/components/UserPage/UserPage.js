@@ -49,7 +49,7 @@ class UserPage extends Component {
   render() {
     let content = null;
     let shelfItemsList = this.state.shelfItems.map((item) => {
-      return(<ShelfItemsList key={item.id} item={item}/>)
+      return(<ShelfItemsList key={item.id} item={item} getShelf={this.getShelf}/>)
     })
     if (this.props.user.userName) {
       content = (

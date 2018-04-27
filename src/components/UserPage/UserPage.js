@@ -10,12 +10,10 @@ import ShelfItemsList from '../ShelfItemsList/ShelfItemsList';
 
 const mapStateToProps = state => ({
   user: state.user,
+  getShelf: state.getShelf
 });
 
 class UserPage extends Component {
-  state = {
-    shelfItems: []
-  }
 
   componentDidMount() {
     this.props.dispatch(fetchUser());
@@ -30,11 +28,10 @@ class UserPage extends Component {
 
   getShelf = () => {
     axios.get('/api/shelf').then((response) => {
-      this.setState({
-        shelfItems: response.data        
+      this.props.dispatch({
+        type: 'GET_SHELF',
+        payload: response.data
       })
-      console.log(this.state.shelfItems);
-      
     }).catch((error) => {
         console.log('Error in get', error);
     })
@@ -47,8 +44,9 @@ class UserPage extends Component {
   }
 
   render() {
+    
     let content = null;
-    let shelfItemsList = this.state.shelfItems.map((item) => {
+    let shelfItemsList = this.props.getShelf.map((item) => {
       return(<ShelfItemsList key={item.id} item={item} getShelf={this.getShelf}/>)
     })
     if (this.props.user.userName) {

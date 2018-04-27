@@ -8,12 +8,13 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  userInfo: state.userInfo
 });
 
 class UserInfo extends Component {
     componentDidMount() {
-
         this.props.dispatch(fetchUser());
+        this.props.dispatch({ type: 'GET_TOTALS'})
         
       }
     
@@ -29,13 +30,20 @@ class UserInfo extends Component {
       }
     
       render() {
+
+        let userInfo = this.props.userInfo.map((item) => {
+          return (
+            <div>{item.username} {item.count}</div>
+          )
+        });
+
         let content = null;
         //map over join table data
     
         if (this.props.user.userName) {
           content = (
             <div>
-              
+            {userInfo}
             </div>
           );
         }
@@ -44,6 +52,8 @@ class UserInfo extends Component {
           <div>
             <Nav />
             { content }
+            <pre>{JSON.stringify(this.props.userInfo)}</pre>
+            
           </div>
         );
       }

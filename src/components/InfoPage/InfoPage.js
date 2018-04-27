@@ -8,13 +8,17 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-const mapDispatchToProps = {
-  fetchUser,
-};
+// const mapDispatchToProps = {
+//   fetchUser,
+// };
 
 class InfoPage extends Component {
+  state = {
+    description: '',
+    image_url: '',
+  }
   componentDidMount() {
-    this.props.fetchUser();
+    this.props.dispatch(fetchUser());
   }
 
   componentDidUpdate() {
@@ -22,6 +26,26 @@ class InfoPage extends Component {
       this.props.history.push('home');
     }
   }
+
+  handleImgChange = (inputText) => {
+    return (event) => {
+      console.log(inputText)
+      this.setState({
+        [inputText]: event.target.value
+      });
+    }
+  }
+
+  handleClick = () => {
+    console.log('clicked!')
+    this.props.dispatch({
+      type: 'ADD_IMAGE',
+      payload: this.state
+    });
+
+  }
+
+
 
   render() {
     let content = null;
@@ -32,9 +56,15 @@ class InfoPage extends Component {
           <p>
             Info Page
           </p>
-          <input placeholder='description'></input>
-          <input type='text' placeholder='absolute url'></input>
-          <button>Add!</button>
+          <input type='text'
+            placeholder='description'
+            onChange={this.handleImgChange('description')}></input>
+          <input type='text'
+            placeholder='absolute url'
+            onChange={this.handleImgChange('image_url')}></input>
+
+          <button onClick={this.handleClick}>Add!</button>
+
         </div>
       );
     }
@@ -42,11 +72,11 @@ class InfoPage extends Component {
     return (
       <div>
         <Nav />
-        { content }
+        {content}
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps, mapDispatchToProps)(InfoPage);
+export default connect(mapStateToProps)(InfoPage);

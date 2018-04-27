@@ -20,6 +20,7 @@ class ShelfItemsList extends Component {
     clickHandler = () => {
         this.deleteItem();
     }
+    
 
     render() {
         console.log(this.props.item.image_url);

@@ -33,7 +33,7 @@ class UserInfo extends Component {
 
         let userInfo = this.props.userInfo.map((item) => {
           return (
-            <div>{item.username} {item.count}</div>
+            <div key={item.username}>{item.username} {item.count}</div>
           )
         });
 
@@ -52,7 +52,7 @@ class UserInfo extends Component {
           <div>
             <Nav />
             { content }
-            <pre>{JSON.stringify(this.props.userInfo)}</pre>
+            {/* <pre>{JSON.stringify(this.props.userInfo)}</pre> */}
             
           </div>
         );

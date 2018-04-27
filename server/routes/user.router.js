@@ -33,6 +33,24 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
 
+router.delete('/:id', (req, res) => {  
+  if (req.isAuthenticated()){
+  let queryText = `DELETE FROM item WHERE "id" = $1 AND "person_id" = $2;`;
+  pool.query(queryText, [req.params.id, req.user.id]).then((result) => {
+    console.log(result);
+    if (result.rowCount === 0) {
+      res.sendStatus(403);
+    } else {
+      res.sendStatus(200);
+    }
+  }).catch((err) => {
+    res.sendStatus(500);
+  })
+  } else {
+    res.sendStatus(403);
+  }
+})
+
 // clear all server session information about this user
 router.get('/logout', (req, res) => {
   // Use passport's built-in method to log out the user

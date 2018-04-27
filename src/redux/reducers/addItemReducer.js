@@ -3,7 +3,7 @@
 function addItemReducer(state = [], action) {
     // Change state with a return
     switch (action.type) {
-      case 'ADD_IMAGE':
+      case 'POST_IMAGE':
         return action.payload;
       default:
         return state;

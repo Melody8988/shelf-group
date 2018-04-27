@@ -5,13 +5,16 @@ import userInfoSaga from './userInfoSaga';
 import postSaga from './addItemSaga';
 
 
+
 export default function* rootSaga() {
+  console.log('in rootsaga')
 
   yield all([
     userSaga(),
     loginSaga(),
-    // watchIncrementAsync()
+    userInfoSaga(),
+    postSaga()
   ]);
-  yield takeEvery('ADD_ITEM', postSaga);
+  yield takeEvery('ADD_IMAGE', postSaga);
   yield takeEvery('GET_TOTALS', userInfoSaga);
 }

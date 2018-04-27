@@ -5,7 +5,7 @@ import axios from 'axios';
 function* postSaga(action) {
     console.log('in postSaga')
     try {
-        console.log('try')
+        // console.log('try')
         console.log('ACTION HERE', action.payload)
         const addItem = yield call(axios.post, '/api/shelf', action.payload);
         console.log('added item', addItem);

@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 class InfoPage extends Component {
   state = {
     description: '',
-    image_url: '', 
+    image_url: '',
   }
   componentDidMount() {
     this.props.dispatch(fetchUser());
@@ -27,23 +27,25 @@ class InfoPage extends Component {
     }
   }
 
-  handleImgChange =(inputText)=>{
-    return(event)=> {
-    console.log(inputText)
-    this.setState({
-      [inputText]: event.target.value
-    });
-   }
+  handleImgChange = (inputText) => {
+    return (event) => {
+      console.log(inputText)
+      this.setState({
+        [inputText]: event.target.value
+      });
+    }
   }
 
-  handleClick=()=>{
+  handleClick = () => {
     console.log('clicked!')
     this.props.dispatch({
-      type: 'ADD_IMAGE', 
+      type: 'ADD_IMAGE',
       payload: this.state
     });
 
   }
+
+
 
   render() {
     let content = null;
@@ -55,14 +57,14 @@ class InfoPage extends Component {
             Info Page
           </p>
           <input type='text'
-                placeholder='description' 
-                 onChange={this.handleImgChange('description')}></input>
-          <input type='text' 
-                 placeholder='absolute url' 
-                 onChange={this.handleImgChange('image_url')}></input>
+            placeholder='description'
+            onChange={this.handleImgChange('description')}></input>
+          <input type='text'
+            placeholder='absolute url'
+            onChange={this.handleImgChange('image_url')}></input>
 
           <button onClick={this.handleClick}>Add!</button>
-      
+
         </div>
       );
     }
@@ -70,7 +72,7 @@ class InfoPage extends Component {
     return (
       <div>
         <Nav />
-        { content }
+        {content}
       </div>
     );
   }

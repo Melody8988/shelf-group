@@ -2,17 +2,20 @@ import {call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-// function* rootSaga() {
-//   console.log('In root saga'); 
-//   yield takeEvery('ADD_ITEM', postSaga);
-// }
-
 function* postSaga(action) {
-    console.log('post saga triggered', action)
+    console.log('in postSaga')
     try {
-      yield call(axios.put, '/api/shelf', action.payload);
-      yield put({})
-    } catch (error) {}
-  }
-
+        console.log('try')
+        console.log('ACTION HERE', action.payload)
+        const addItem = yield call(axios.post, '/api/shelf', action.payload);
+        console.log('added item', addItem);
+        yield put({
+            type: 'POST_IMAGE',
+            payload: addItem.data
+        })
+    } catch (error) {
+        console.log('postSaga ERROR', error)
+    }
+}
 export default postSaga;
+

@@ -13,7 +13,6 @@ const mapStateToProps = state => ({
 
 class UserInfo extends Component {
     componentDidMount() {
-
         this.props.dispatch(fetchUser());
         this.props.dispatch({ type: 'GET_TOTALS'})
         
@@ -53,6 +52,8 @@ class UserInfo extends Component {
           <div>
             <Nav />
             { content }
+            <pre>{JSON.stringify(this.props.userInfo)}</pre>
+            
           </div>
         );
       }
